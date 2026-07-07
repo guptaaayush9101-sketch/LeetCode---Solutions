@@ -1,0 +1,42 @@
+2225. Find Players With Zero or One Losses
+
+class Solution {
+    public List<List<Integer>> findWinners(int[][] matches) {
+        LinkedHashMap<Integer, Integer> map = new LinkedHashMap<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> winnerslist = new ArrayList<>();
+        ArrayList<Integer> loserslist = new ArrayList<>();
+        ArrayList<Integer> onlywinnerslist = new ArrayList<>();
+        int n = matches.length;
+        for (int i = 0; i < n; i++) {
+            int a = matches[i][0];
+            int b = matches[i][1];
+            winnerslist.add(a);
+            loserslist.add(b);
+        }
+        for (int i = 0; i < winnerslist.size(); i++) {
+            if (!loserslist.contains(winnerslist.get(i))) {
+                if (!onlywinnerslist.contains(winnerslist.get(i))) {
+                    onlywinnerslist.add(winnerslist.get(i));
+                }
+            }
+        }
+        for (int i = 0; i < loserslist.size(); i++) {
+            int num = loserslist.get(i);
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        ArrayList<Integer> valuelist = new ArrayList<>(map.values());
+        ArrayList<Integer> keylist = new ArrayList<>(map.keySet());
+        ArrayList<Integer> sollist = new ArrayList<>();
+        for (int i = 0; i < valuelist.size(); i++) {
+            if (valuelist.get(i) == 1) {
+                sollist.add(keylist.get(i));
+            }
+        }
+        Collections.sort(sollist);
+        Collections.sort(onlywinnerslist);
+        ans.add(onlywinnerslist);
+        ans.add(sollist);
+        return ans;
+    }
+}
