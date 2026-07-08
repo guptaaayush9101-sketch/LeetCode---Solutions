@@ -1,0 +1,18 @@
+
+1207. Unique Number of Occurrences
+
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) {
+        int n = arr.length;
+        HashSet<Integer>set = new HashSet<>();
+        HashMap<Integer,Integer>map = new HashMap<>();
+        for(int i=0;i<n;i++){
+            int num = arr[i];
+            map.put(num,map.getOrDefault(num,0)+1);
+        }
+        for(int x : map.values()){
+            set.add(x);
+        }
+        return map.size() == set.size();
+    }
+}
