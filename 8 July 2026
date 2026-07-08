@@ -1,0 +1,40 @@
+2225. Find Players With Zero or One Losses
+
+class Solution {
+    public List<List<Integer>> findWinners(int[][] matches) {
+        ArrayList<Integer> onlywinnerlist = new ArrayList<>();
+        ArrayList<Integer> oneloserlist = new ArrayList<>();
+        ArrayList<Integer> loserslist = new ArrayList<>();
+        int n = matches.length;
+        HashSet<Integer> winnerSet = new HashSet<>();
+        HashSet<Integer> loserSet = new HashSet<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int a = matches[i][0];
+            int b = matches[i][1];
+            winnerSet.add(a);
+            loserSet.add(b);
+            loserslist.add(b);
+        }
+        for (int num : winnerSet) {
+            if (!loserSet.contains(num)) {
+                onlywinnerlist.add(num);
+            }
+        }
+        for (int i = 0; i < loserslist.size(); i++) {
+            int num = loserslist.get(i);
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        for (int x : map.keySet()) {
+            if (map.get(x) == 1) {
+                oneloserlist.add(x);
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        Collections.sort(onlywinnerlist);
+        Collections.sort(oneloserlist);
+        ans.add(onlywinnerlist);
+        ans.add(oneloserlist);
+        return ans;
+    }
+}
