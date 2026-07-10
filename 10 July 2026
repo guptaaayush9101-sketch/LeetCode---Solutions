@@ -1,0 +1,29 @@
+1814. Count Nice Pairs in an Array
+
+class Solution {
+    public int reversed(int num) {
+        int digit = 0;
+        int reverse = 0;
+        while (num > 0) {
+            digit = num % 10;
+            reverse = reverse * 10 + digit;
+            num = num / 10;
+        }
+        return reverse;
+    }
+
+    public int countNicePairs(int[] nums) {
+        int count = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if(0 <= i && i < j && j < n){
+                    if((nums[i] + reversed(nums[j]))  == (nums[j] + reversed(nums[i]))){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+}
