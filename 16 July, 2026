@@ -1,0 +1,60 @@
+542. 01 Matrix
+
+class Solution {
+    class Node {
+        int first;
+        int second;
+        int third;
+
+        Node(int first, int second, int third) {
+            this.first = first;
+            this.second = second;
+            this.third = third;
+        }
+    }
+
+    public int[][] updateMatrix(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+        Queue<Node> q = new LinkedList<>();
+        boolean vis[][] = new boolean[n][m];
+        int ansmat[][] = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 0) {
+                    vis[i][j] = true;
+                    q.offer(new Node(i, j, 0));
+                } else {
+                    vis[i][j] = false;
+                }
+            }
+        }
+        while (!q.isEmpty()) {
+            Node curr = q.poll();
+            int row = curr.first;
+            int col = curr.second;
+            int dist = curr.third;
+
+            ansmat[row][col] = dist;
+            
+            int distarr[][] = {
+                {-1,0},
+                {0,1},
+                {1,0},
+                {0,-1}
+            };
+            for(int d[] :distarr){
+                int nr = row + d[0];
+                int nc = col + d[1];
+
+                if(nr >= 0 && nr < n &&
+                nc >= 0 && nc < m && 
+                !vis[nr][nc]){
+                    vis[nr][nc] = true;
+                    q.offer(new Node(nr,nc,dist+1));
+                }
+            }
+        }
+        return ansmat;
+    }
+}
