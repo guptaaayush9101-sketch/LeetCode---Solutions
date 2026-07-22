@@ -22,3 +22,17 @@ class Solution {
         return dp[n];
     }
 }
+
+
+// if the questions asks 
+find the best way or the minimum number of steps
+
+class Solution {
+    public int climbStairs(int n) {
+        if(n==0) return 0;
+        if(n==1) return 1;
+        int firstway = climbStairs(n-1) + 1;
+        int secondway = climbStairs(n-2) + 1;
+        return Math.min(firstway , secondway);
+    }
+}
