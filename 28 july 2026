@@ -17,3 +17,21 @@ class Solution {
         return solve(i+1,j-1,arr);
     }
 }
+
+
+Rotate Array by One
+
+class Solution {
+    public void rotate(int[] arr) {
+        // code here
+        int n = arr.length;
+        int j = arr[n-1];
+        int i=n-1;
+        
+        while(i>0){
+            arr[i] = arr[i-1];
+            i--;
+        }
+        arr[0] = j;
+    }
+}
