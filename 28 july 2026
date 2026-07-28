@@ -1,0 +1,19 @@
+Reverse an Array
+
+class Solution {
+    public void reverseArray(int arr[]) {
+        // code here
+        int n = arr.length;
+        solve(0,n-1,arr);
+    }
+    public int[] solve(int i,int j,int arr[]){
+        if(i >= j){
+            return arr;
+        }
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        
+        return solve(i+1,j-1,arr);
+    }
+}
