@@ -1,0 +1,36 @@
+// ninjas training
+
+public class Solution {
+    public static int ninjaTraining(int n, int points[][]) {
+        int n = points.length;
+        int m = points[0].length;
+        int maxi = -1;
+        int temp = -1;
+        
+            for(int j=0;j<3;j++){
+                if(points[0][j] > maxi){
+                    maxi = points[0][j];
+                    temp = j;
+                }
+            }
+            total += maxi;
+
+        
+
+        int last = -1;
+        maxi = -1;
+        for(int i=1;i<n;i++){
+            maxi = -1;
+            for(int j=0;j<3;j++){
+                if(j!= temp && points[i][j] > maxi){
+                    maxi = points[i][j];
+                    last = j;
+                }
+            }
+            total += maxi;
+            temp = last;
+        }
+        return total;
+    }
+
+}
