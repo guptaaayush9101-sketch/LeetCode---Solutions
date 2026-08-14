@@ -1,0 +1,42 @@
+416. Partition Equal Subset Sum
+
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int n = nums.length;
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+        }
+        int dp[][] = new int[n][sum+1];
+        for(int[] row:dp){
+            Arrays.fill(row,-1);
+        }
+        if(sum % 2 != 0){
+            return false;
+        }
+        
+        return solve(nums,0,0,sum/2,dp);
+    }
+    public boolean solve(int[] nums,int i,int currsum,int target,int dp[][]){
+        int n = nums.length;
+        if(currsum == target){
+            return true;
+        }
+        if(i == n){
+            return false;
+        }
+        if(dp[i][currsum] != -1){
+            return dp[i][currsum] == 1;
+        }
+        if(solve(nums,i+1,currsum + nums[i],target,dp)){
+            dp[i][currsum] = 1;
+            return true;
+        }
+        if(solve(nums,i+1,currsum,target,dp)){
+             dp[i][currsum] = 1;
+            return true;
+        }
+        dp[i][currsum] = 0;
+        return false;
+    }
+}
