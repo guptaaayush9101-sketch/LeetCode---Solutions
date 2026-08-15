@@ -1,0 +1,22 @@
+4020. Elevator Requests I
+
+class Solution {
+    public int elevatorRequests(int n, int[] requests) {
+        int sum = 0;
+        int m = requests.length;
+        int ans[] = new int[m];
+        int i=0;
+        int j=i+1;
+        ans[0] = requests[0];
+        while(j<m){
+            
+            ans[j] = Math.abs(requests[i]-requests[j]);
+            i++;
+            j++;
+        }
+        for(int k=0;k<ans.length;k++){
+            sum += ans[k];
+        }
+        return sum;
+    }
+}
