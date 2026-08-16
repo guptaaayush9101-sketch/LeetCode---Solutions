@@ -1,0 +1,34 @@
+4024. Nearest Available Drone
+
+class Solution {
+    public int nearestDrone(int[][] drones, int[] target) {
+        
+        int n = drones.length;
+        int ansarr[] = new int[n];
+        
+        
+        for(int i=0;i<n;i++){
+            int sum = 0;
+            for(int j=0;j<2;j++){
+                sum += Math.abs(drones[i][j] - target[j]);
+            }
+            
+            if(sum <= drones[i][2]){
+                ansarr[i] = sum;
+            }
+            else{
+                ansarr[i] = Integer.MAX_VALUE;
+            }
+        }
+        int val = -1;
+        int ans = Integer.MAX_VALUE;
+        for(int i=0;i<n;i++){
+            int a = ansarr[i];
+            if(a < ans){
+                ans = a;
+                val = i;
+            }
+        }
+        return val;
+    }
+}
