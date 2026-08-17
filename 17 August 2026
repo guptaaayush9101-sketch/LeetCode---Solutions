@@ -1,0 +1,44 @@
+2035. Partition Array Into Two Arrays to Minimize Sum Difference
+
+class Solution {
+    public int minimumDifference(int[] nums) {
+        int n = nums.length;
+        ArrayList<ArrayList<Integer>> all = solve(nums,0,new ArrayList<>());
+        ArrayList<Integer>sumlist = new ArrayList<>();
+        int sum = 0;
+        for(int i=0;i<all.size();i++){
+            sum = 0;
+            for(int j=0;j<all.get(i).size();j++){
+                sum += all.get(i).get(j);
+            }
+            sumlist.add(sum);
+        }
+        int ans = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
+        for(int i=0;i<sumlist.size();i++){
+            for(int j=i+1;j<sumlist.size();j++){
+                ans = Math.abs(sumlist.get(i) - sumlist.get(j));
+                min = Math.min(ans,min);
+            }
+
+        }
+        return min;
+    }
+    public ArrayList<ArrayList<Integer>> solve(int[] nums,int i,ArrayList<Integer> current){
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        int n = nums.length;
+        if(i==n){
+            list.add(new ArrayList<>(current));
+            return list;
+        }
+        current.add(nums[i]);
+        ArrayList<ArrayList<Integer>> take = solve(nums,i+1,current);
+        current.remove(current.size() - 1);
+        ArrayList<ArrayList<Integer>> nottake = solve(nums,i+1,current);
+
+        list.addAll(take);
+        list.addAll(nottake);
+        return list;
+    }
+
+}
