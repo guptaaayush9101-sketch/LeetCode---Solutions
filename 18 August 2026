@@ -1,0 +1,33 @@
+169. Majority Element
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n = nums.length;
+        if(n == 1){
+            return nums[0];
+        }
+        HashMap<Integer,Integer>map = new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(map.containsKey(nums[i])){
+                map.put(nums[i],map.get(nums[i])+1);
+            }
+            else{
+                map.put(nums[i],1);
+            }
+        }
+        ArrayList<Integer>list = new ArrayList<>(map.values());
+        ArrayList<Integer>list2 = new ArrayList<>(map.keySet());
+        int ans = list2.get(0);
+        int a = list.get(0);
+        for(int i=1;i<list.size();i++){
+            if(list.get(i) > a){
+                a = list.get(i);   
+                ans = list2.get(i);
+            }
+        }
+        if(list2.size() == 1){
+            ans = list2.get(0);
+        }
+        return ans;
+    }
+}
