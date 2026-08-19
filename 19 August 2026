@@ -1,0 +1,32 @@
+Subset Sum Problem
+
+
+class Solution {
+	static boolean isSubsetSum(int arr[], int sum) {
+		int n = arr.length;
+		Boolean dp[][] = new Boolean[n][sum + 1];
+		
+		return solve(arr, n - 1, sum,dp);
+	}
+	public static boolean solve(int arr[], int i, int sum, Boolean dp[][]) {
+		int n = arr.length;
+		if (sum == 0) {
+			return true;
+		}
+		if (i == 0) {
+			return arr[0] == sum;
+		}
+		if (dp[i][sum] != null) {
+			return dp[i][sum];
+		}
+		boolean take = false;
+		
+		if (arr[i] <= sum) {
+			take = solve(arr, i - 1, sum - arr[i], dp);
+		}
+		boolean nottake = solve(arr, i - 1, sum,dp);
+		
+		dp[i][sum] = take || nottake;
+		return dp[i][sum];
+	}
+}
