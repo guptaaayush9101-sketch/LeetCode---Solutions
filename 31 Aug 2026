@@ -1,0 +1,53 @@
+322. Coin Change
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int n = coins.length;
+        int answer = Integer.MAX_VALUE;
+        int count = 0;
+        if(amount == 0){
+            return 0;
+        }
+        ArrayList<Integer>list = new ArrayList<>();
+       ArrayList<ArrayList<Integer>> biglist = new ArrayList<>();
+         func(coins,amount,0,0,list,biglist);
+        for(int i=0;i<biglist.size();i++){
+            count = 0;
+            for(int j=0;j<biglist.get(i).size();j++){
+                count++;
+            }
+            answer = Math.min(answer,count);
+        }
+        if(answer == Integer.MAX_VALUE){
+            return -1;
+        }
+        return answer;
+    }
+
+    public void func(int[] coins , int amount , int i ,int sum,ArrayList<Integer>list ,ArrayList<ArrayList<Integer>>anslist){
+        if(i == coins.length){
+    return;
+}
+        if(amount == sum){
+            anslist.add(new ArrayList<>(list));
+            return;
+        }
+        if(sum > amount){
+            return;
+        }
+        
+            
+            sum += coins[i];
+            list.add(coins[i]);
+            func(coins,amount,i,sum,list,anslist);
+
+            sum -= coins[i];
+            list.remove(list.size()-1);
+
+            func(coins, amount, i + 1, sum, list, anslist);
+            
+        
+        
+    }
+
+}
