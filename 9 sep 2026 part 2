@@ -1,0 +1,30 @@
+1539. Kth Missing Positive Number
+
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int n = arr.length;
+        ArrayList<Integer> newlist = new ArrayList<>();
+        ArrayList<Integer> list2 = new ArrayList<>();
+        ArrayList<Integer> oldlist = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            oldlist.add(arr[i]);
+        }
+        int firstval = arr[0];
+        for(int i=0;i<n;i++){
+            if(arr[i] > firstval){
+                firstval = arr[i];
+            }
+        }
+        for(int i=1;i<=firstval+k;i++){
+            newlist.add(i);
+        }
+        for(int i=0;i<newlist.size();i++){
+            if(!oldlist.contains(newlist.get(i))){
+                list2.add(newlist.get(i));
+            }
+        }
+        
+        return list2.get(k-1);
+        
+    }
+}
