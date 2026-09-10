@@ -1,0 +1,50 @@
+1482. Minimum Number of Days to Make m Bouquets
+
+class Solution {
+    public int minDays(int[] bloomDay, int m, int k) {
+        int n = bloomDay.length;
+        int ans = -1;
+        int maxelem = bloomDay[0];
+        int minelem = bloomDay[0];
+        for(int i=0;i<n;i++){
+            if(bloomDay[i] > maxelem){
+                maxelem = bloomDay[i];
+            }
+            if(bloomDay[i] < minelem){
+                minelem = bloomDay[i];
+            }
+        }
+        int low = minelem;
+        int high = maxelem;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(!func(bloomDay,mid,m,k)){
+                
+                low = mid+1;
+            }
+            else{
+                ans = mid;
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+    public boolean func(int[] bloomDay , int day ,int m , int k){
+        int count = 0;
+        int n = bloomDay.length;
+        int noofbloom = 0;
+        
+        for(int i=0;i<n;i++){
+            int rep = bloomDay[i];
+            if(rep <= day){
+                count++;
+            }
+            else{
+                noofbloom += count/k;
+                count = 0;
+            }
+        }
+        noofbloom += count/k;
+        return noofbloom >= m;
+    }
+}
