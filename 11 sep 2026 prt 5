@@ -1,0 +1,33 @@
+1283. Find the Smallest Divisor Given a Threshold
+
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int n = nums.length;
+        int startval = nums[0];
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > startval) {
+                startval = nums[i];
+            }
+        }
+        int low = 1;
+        int high = startval;
+        int ans = Integer.MAX_VALUE;
+        int rem = 0;
+        while (low <= high) {
+            rem = 0;
+            int mid = low + (high - low) / 2;
+            for (int i = 0; i < n; i++) {
+                int curr = nums[i];
+                rem += (curr + mid - 1) / mid;
+            }
+            if (rem <= threshold) {
+                ans = Math.min(ans, mid);
+                high = mid - 1;
+            } else if (rem > threshold) {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
