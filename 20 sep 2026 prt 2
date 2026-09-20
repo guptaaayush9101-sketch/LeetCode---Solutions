@@ -1,0 +1,50 @@
+The Painter's Partition Problem-II
+
+class Solution {
+	public int minTime(int[] arr, int k) {
+		// code here
+		int n = arr.length;
+		if (n < k) {
+			return - 1;
+		}
+		int max = arr[0];
+		for (int i = 0; i<n; i++) {
+			if (arr[i] > max) {
+				max = arr[i];
+			}
+		}
+		int sum = 0;
+		for (int i = 0; i<n; i++) {
+			sum += arr[i];
+		}
+		int low = max;
+		int high = sum;
+		int ans = -1;
+		while(low <= high){
+		    int mid = low+(high-low)/2;
+		    if(possible(arr,mid,k)){
+		        ans = mid;
+		        high = mid-1;
+		    }
+		    else{
+		        low = mid+1;
+		    }
+		}
+		return ans;
+	}
+	public boolean possible(int[] arr, int paint, int k) {
+		int n = arr.length;
+		int painter = 1;
+		int paintwall = 0;
+		for (int i = 0; i<n; i++) {
+			if (paintwall + arr[i] <= paint) {
+				paintwall += arr[i];
+			}
+			else {
+				painter++;
+				paintwall = arr[i];
+			}
+		}
+		return painter <= k;
+	}
+}
