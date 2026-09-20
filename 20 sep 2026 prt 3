@@ -1,0 +1,46 @@
+410. Split Array Largest Sum
+
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int n = nums.length;
+        int max = nums[0];
+        for(int i=0;i<n;i++){
+            if(nums[i] > max){
+                max = nums[i];
+            }
+        }
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+        }
+        int low = max;
+        int high = sum;
+        int ans = -1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(possible(nums,mid,k)){
+                ans = mid;
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return ans;
+    }
+    public boolean possible(int[] nums , int ways , int k){
+        int n = nums.length;
+        int stu = 1;
+        int waysdone = 0;
+        for(int i=0;i<n;i++){
+            if(waysdone + nums[i] <= ways){
+                waysdone += nums[i];
+            }
+            else{
+                stu++;
+                waysdone = nums[i];
+            }
+        }
+        return stu <= k;
+    }
+}
