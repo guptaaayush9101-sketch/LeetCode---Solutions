@@ -1,0 +1,18 @@
+class Solution {
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int left = func(root.left);
+        int right = func(root.right);
+        return left + right;
+    }
+    public int func(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = func(root.left);
+        int right = func(root.right);
+        return Math.max(left,right)+1;
+    }
+}
