@@ -1,0 +1,61 @@
+class Solution {
+
+    class Pair {
+        int row;
+        int value;
+
+        Pair(int row, int value) {
+            this.row = row;
+            this.value = value;
+        }
+    }
+
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+
+        Map<Integer, ArrayList<Pair>> map = new TreeMap<>();
+
+        func(root, 0, 0, map);
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for (ArrayList<Pair> list : map.values()) {
+
+            Collections.sort(list, (a, b) -> {
+
+                if (a.row != b.row) {
+                    return a.row - b.row;
+                }
+
+                return a.value - b.value;
+            });
+
+            ArrayList<Integer> temp = new ArrayList<>();
+
+            for (Pair p : list) {
+                temp.add(p.value);
+            }
+
+            ans.add(temp);
+        }
+
+        return ans;
+    }
+
+    public void func(TreeNode root, int row, int col,
+                     Map<Integer, ArrayList<Pair>> map) {
+
+        if (root == null) {
+            return;
+        }
+
+        if (!map.containsKey(col)) {
+            map.put(col, new ArrayList<>());
+        }
+
+        map.get(col).add(new Pair(row, root.val));
+
+        func(root.left, row + 1, col - 1, map);
+
+        func(root.right, row + 1, col + 1, map);
+    }
+}
