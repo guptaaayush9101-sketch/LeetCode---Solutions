@@ -1,0 +1,84 @@
+/*
+Definition for Node
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int val) {
+        data = val;
+        left = right = null;
+
+    }
+}
+*/
+
+class Pair {
+	int row;
+	int value;
+
+	Pair(int row, int value) {
+		this.row = row;
+		this.value = value;
+	}
+}
+
+class Solution {
+	public ArrayList<Integer> bottomView(Node root) {
+	    ArrayList<Integer>ansans = new ArrayList<>();
+		// code here
+		Map<Integer, ArrayList<Pair>> map = new TreeMap<>();
+
+		func(root, 0, 0, map);
+
+		List<List<Integer>> ans = new ArrayList<>();
+
+		for (ArrayList<Pair> list : map.values()) {
+			Collections.sort(list, (a, b) -> {
+                   return a.row - b.row;
+               });
+// 			Collections.sort(list, (a, b) -> {
+
+// 				if (a.row != b.row) {
+// 					return a.row - b.row;
+// 				}
+
+// 				return a.value - b.value;
+// 			});
+
+			ArrayList<Integer> temp = new ArrayList<>();
+
+			for (Pair p : list) {
+				temp.add(p.value);
+			}
+
+			ans.add(temp);
+		}
+		for(int i=0;i<ans.size();i++){
+		    for(int j=ans.get(i).size()-1;j>ans.get(i).size()-2;j--){
+		        ansans.add(ans.get(i).get(j));
+		    }
+		}
+		return ansans;
+// 		return ans;
+
+	}
+
+	public void func(Node root, int row, int col, Map<Integer, ArrayList<Pair>> map) {
+
+		if (root == null) {
+			return;
+		}
+
+		if (!map.containsKey(col)) {
+			map.put(col, new ArrayList<>());
+		}
+
+		map.get(col).add(new Pair(row, root.data));
+
+		func(root.left, row + 1, col - 1, map);
+
+		func(root.right, row + 1, col + 1, map);
+	}
+
+}
