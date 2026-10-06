@@ -1,0 +1,70 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ans = null;
+        ArrayList<TreeNode>plist = new ArrayList<>();
+        ArrayList<TreeNode>qlist = new ArrayList<>();
+        pfunc(root,p,plist);
+        qfunc(root,q,qlist);
+        for(int i=0;i<plist.size();i++){
+            for(int j=0;j<qlist.size();j++){
+                if(plist.get(i) == qlist.get(j)){
+                    return plist.get(i);
+                    
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean pfunc(TreeNode root, TreeNode p, ArrayList<TreeNode> plist) {
+
+        if (root == null) {
+            return false;
+        }
+
+        if (root == p) {
+            plist.add(root);
+            return true;
+        }
+
+        boolean left = pfunc(root.left, p, plist);
+        boolean right = pfunc(root.right, p, plist);
+
+        if (left || right) {
+            plist.add(root);
+            return true;
+        }
+
+        return false;
+    }
+    public boolean qfunc(TreeNode root, TreeNode q, ArrayList<TreeNode> qlist) {
+
+        if (root == null) {
+            return false;
+        }
+
+        if (root == q) {
+            qlist.add(root);
+            return true;
+        }
+
+        boolean left = qfunc(root.left, q, qlist);
+        boolean right = qfunc(root.right, q, qlist);
+
+        if (left || right) {
+            qlist.add(root);
+            return true;
+        }
+
+        return false;
+    }
+}
