@@ -1,0 +1,82 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int widthOfBinaryTree(TreeNode root) {
+        int ans = -1;
+        ArrayList<ArrayList<TreeNode>> fulllist = new ArrayList<>();
+        if(root == null){
+            return 0;
+        }
+        Queue<TreeNode>q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            boolean hasNode = false;
+
+            for(TreeNode node : q) {
+                if(node != null) {
+                    hasNode = true;
+                    break;
+                }
+            }
+
+            if(!hasNode) {
+                break;
+            }
+
+            int size = q.size();
+            ArrayList<TreeNode>list = new ArrayList<>();
+            
+            for(int i=0;i<size;i++){
+                TreeNode currNode = q.poll();
+                list.add(currNode);
+                if(currNode == null) {
+                    q.add(null);
+                    q.add(null);
+                }
+                else {
+
+                if(currNode.left != null){
+                    q.add(currNode.left);
+                }
+                else{
+                    q.add(null);
+                }
+
+                if(currNode.right != null){
+                    q.add(currNode.right);
+                }
+                else{
+                    q.add(null);
+                }
+            }
+            }
+            fulllist.add(list);
+        }
+        for(ArrayList<TreeNode> list : fulllist) {
+
+            int f = 0;
+            int l = list.size() - 1;
+            while(list.get(f) == null){
+                f++;
+            }
+            while(list.get(l) == null){
+                l--;
+            }
+            ans = Math.max(l-f+1 , ans);
+        }
+        return ans;
+    }
+}
