@@ -1,0 +1,24 @@
+class Solution {
+    int index = 0;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        index = postorder.length - 1;
+        return func(inorder,postorder,0,inorder.length-1);
+    }
+    public TreeNode func(int[] inorder, int[] postorder,int start,int end){
+        if(start > end){
+            return null;
+        }
+        int rootValue = postorder[index];
+        index--;
+        TreeNode root = new TreeNode(rootValue);
+        int pos = start;
+        while(inorder[pos] != rootValue){
+            pos++;
+        }
+        root.right = func(inorder,postorder,pos+1,end);
+        root.left = func(inorder,postorder,start,pos-1);
+        
+        return root;
+    }
+
+}
