@@ -1,0 +1,50 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        boolean ans1 = true;
+        boolean ans2 = true;
+        ArrayList<Integer>leftlist = new ArrayList<>();
+        ArrayList<Integer>rightlist = new ArrayList<>();
+        func(root.left,leftlist);
+        func(root.right,rightlist);
+        for(int i=0;i<leftlist.size();i++){
+            if(leftlist.get(i) >= root.val){
+                ans1 = false;
+            }
+        }
+        for(int i=0;i<rightlist.size();i++){
+            if(rightlist.get(i) <= root.val){
+                ans2 = false;
+            }
+        }
+        if(ans1 && ans2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void func(TreeNode root , ArrayList<Integer>list){
+        if(root == null){
+            return;
+        }
+        list.add(root.val);
+        func(root.left,list);
+        func(root.right,list);
+        return;
+    }
+}
