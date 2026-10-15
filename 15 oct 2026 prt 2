@@ -1,0 +1,76 @@
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> biglist = new ArrayList<>();
+
+        path(root, list, biglist);
+
+        ArrayList<ArrayList<Integer>> newlist = new ArrayList<>();
+        int ans = -1;
+
+        // Original logic: same list contains both p and q
+        for (ArrayList<Integer> alist : biglist) {
+            if (alist.contains(p.val) && alist.contains(q.val)) {
+                newlist.add(alist);
+            }
+        }
+
+        if (!newlist.isEmpty()) {
+            ArrayList<Integer> alist = newlist.get(0);
+
+            for (int j = 0; j < alist.size(); j++) {
+                if (alist.get(j) == p.val || alist.get(j) == q.val) {
+                    ans = alist.get(j);
+                    break;
+                }
+            }
+        } else {
+            ArrayList<Integer> path1 = null;
+            ArrayList<Integer> path2 = null;
+
+            // Find separate paths for p and q
+            for (ArrayList<Integer> alist : biglist) {
+                if (alist.contains(p.val)) {
+                    path1 = alist;
+                }
+
+                if (alist.contains(q.val)) {
+                    path2 = alist;
+                }
+            }
+
+            // Find the last common element
+            if (path1 != null && path2 != null) {
+                for (int i = 0; i < Math.min(path1.size(), path2.size()); i++) {
+                    if (path1.get(i).equals(path2.get(i))) {
+                        ans = path1.get(i);
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        return new TreeNode(ans);
+    }
+
+    public void path(TreeNode root, ArrayList<Integer> list,
+                     ArrayList<ArrayList<Integer>> biglist) {
+        if (root == null) {
+            return;
+        }
+
+        list.add(root.val);
+
+        if (root.left == null && root.right == null) {
+            biglist.add(new ArrayList<>(list));
+        }
+
+        path(root.left, list, biglist);
+        path(root.right, list, biglist);
+
+        list.remove(list.size() - 1);
+    }
+}
+```
