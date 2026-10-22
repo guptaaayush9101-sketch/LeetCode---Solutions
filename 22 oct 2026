@@ -1,0 +1,26 @@
+lass Solution {
+    public boolean isValidBST(TreeNode root) {
+        ArrayList<Integer>list = new ArrayList<>();
+        func(root,list);
+        ArrayList<Integer>newlist = new ArrayList<>(list);
+        Collections.sort(newlist);
+        if(!newlist.equals(list)){
+            return false;
+        }
+        for(int i=1;i<newlist.size();i++){
+            if(newlist.get(i).equals(newlist.get(i-1))){
+                return false;
+            }
+        }
+        return true;
+    }
+    public void func(TreeNode root , ArrayList<Integer>list){
+        if(root == null){
+            return;
+        }
+        func(root.left,list);
+        list.add(root.val);
+        func(root.right,list);
+        return;
+    }
+}
