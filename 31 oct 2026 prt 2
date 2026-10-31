@@ -1,0 +1,31 @@
+class Solution {
+    int maxLength(int arr[]) {
+        // code here
+        int maxi = Integer.MIN_VALUE;
+        int n = arr.length;
+        int p[] = new int[n];
+        HashMap<Integer,Integer>map = new HashMap<>();
+        map.put(0,-1);
+        p[0] = arr[0];
+        for(int i=1;i<n;i++){
+            p[i] = p[i-1] + arr[i];
+        }
+        
+        for(int j=0;j<p.length;j++){
+            int req = p[j] - 0;
+            if(map.containsKey(req)){
+                int i = map.getOrDefault(req,0)+1;
+                int len = j-i+1;
+                maxi = Math.max(len,maxi);
+            }
+            else{
+                map.put(p[j],j);
+            }
+        }
+        if(maxi == Integer.MIN_VALUE){
+            return 0;
+        } else {
+            return maxi;
+        }
+    }
+}
