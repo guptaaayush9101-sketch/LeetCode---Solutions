@@ -1,0 +1,26 @@
+class Solution {
+    public int firstUniqChar(String s) {
+        char ans = '\0';
+        int answer = -1;
+        int n = s.length();
+        char nums[] = s.toCharArray();
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        HashMap<Character, Integer> map2 = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map1.put(nums[i], map1.getOrDefault(nums[i], 0) + 1);
+            map2.put(nums[i], i);
+        }
+        for (int i = 0; i < n; i++) {
+            if (map1.get(nums[i]) == 1) {
+                ans = nums[i];
+                break;
+            }
+        }
+        for (Map.Entry<Character, Integer> entry : map2.entrySet()) {
+            if (ans == entry.getKey()) {
+                answer = entry.getValue();
+            }
+        }
+        return answer;
+    }
+}
