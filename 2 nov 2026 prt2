@@ -1,0 +1,30 @@
+class Solution {
+    public long countStableSubarrays(int[] capacity) {
+        int count = 0;
+        int n = capacity.length;
+        ArrayList<ArrayList<Integer>> listoflist = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> shortlist = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            ArrayList<Integer>list = new ArrayList<>();
+            for(int j=i;j<n;j++){
+                list.add(capacity[j]);
+                listoflist.add(new ArrayList<>(list));
+            }
+        }
+        for(int i=0;i<listoflist.size();i++){
+            if(listoflist.get(i).size() >= 3){
+                shortlist.add(listoflist.get(i));
+            }
+        }
+        for(int i=0;i<shortlist.size();i++){
+            int sum = 0;
+            for(int j=1;j<shortlist.get(i).size()-1;j++){
+                sum += shortlist.get(i).get(j);
+            }
+            if(shortlist.get(i).get(0) == sum && shortlist.get(i).get(shortlist.get(i).size() - 1) == sum){
+                count++;
+            }
+        }
+        return count;
+    }
+}
