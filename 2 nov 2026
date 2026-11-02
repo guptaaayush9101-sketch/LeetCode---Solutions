@@ -1,0 +1,128 @@
+class Solution {
+    public long numOfSubsequences(String s) {
+        int n = s.length();
+        //case1
+        long ans1 = 0;
+        long ans2 = 0;
+        long ans3 = 0;
+        long oldans = func(s);
+        long countCT = 0;
+        HashMap<Character,Integer>map = new HashMap<>();
+        HashMap<Character,Integer>map2 = new HashMap<>();
+        for(int i=0;i<n;i++){
+            
+            
+            char ch = s.charAt(i);
+            if(ch == 'C'){
+                map.put(ch,map.getOrDefault(ch,0)+1);
+            }
+            else if(ch == 'T'){
+                countCT += map.getOrDefault('C',0);
+            }
+        }
+        ans1 = oldans + countCT;
+
+        //case2
+        long countLC = 0;
+        for(int i=0;i<n;i++){
+            
+            
+            char ch = s.charAt(i);
+            if(ch == 'L'){
+                map2.put(ch,map2.getOrDefault(ch,0)+1);
+            }
+            else if(ch == 'C'){
+                countLC += map2.getOrDefault('L',0);
+            }
+        }
+        ans2 = oldans + countLC;
+
+        //case3
+        long totalT = 0;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i) == 'T'){
+                totalT++;
+            }
+        }
+        long leftL = 0;
+        long rightT = totalT;
+        for(int i=0;i<n;i++){
+            ans3 = Math.max(leftL * rightT, ans3);
+            if (i == n) break;
+            char ch = s.charAt(i);
+            if (ch == 'L') {
+                leftL++;
+            }
+            if(ch == 'T'){
+                rightT--;
+            }
+            
+        }
+        ans3 += oldans;
+        return Math.max(ans1,Math.max(ans2,ans3));
+    }
+
+    public long func(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        map.put('L', 0);
+        int n = s.length();
+        long countLC = 0;
+        long countLCT = 0;
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            if (ch == 'L') {
+                map.put(ch, map.getOrDefault(ch, 0) + 1);
+            }
+            if (ch == 'C') {
+                countLC += map.get('L');
+            }
+            if (ch == 'T') {
+                countLCT += countLC;
+            }
+        }
+        return countLCT;
+    }
+}
+
+
+//brute
+// class Solution {
+//     public long numOfSubsequences(String s) {
+//         long ans1 = 0;
+//         long ans2 = 0;
+//         int n = s.length();
+//         long oldans = func(s);
+//         String s1 = 'L' + s;
+//         ans1 = func(s1);
+//         String s2 = s + 'T';
+//         ans2 = func(s2);
+//         long ans3 = 0;
+
+//         for (int i = 0; i <= s.length(); i++) {
+//             String s3 = s.substring(0, i) + "C" + s.substring(i);
+//             ans3 = Math.max(ans3, func(s3));
+//         }
+//         return Math.max(ans1,Math.max(ans2,ans3));
+//     }
+
+//     public long func(String s) {
+//         HashMap<Character, Integer> map = new HashMap<>();
+//         map.put('L', 0);
+//         int n = s.length();
+//         long countLC = 0;
+//         long countLCT = 0;
+//         for (int i = 0; i < n; i++) {
+//             char ch = s.charAt(i);
+//             if (ch == 'L') {
+//                 map.put(ch, map.getOrDefault(ch, 0) + 1);
+//             }
+//             if (ch == 'C') {
+//                 countLC += map.get('L');
+//             }
+//             if (ch == 'T') {
+//                 countLCT += countLC;
+//             }
+//         }
+//         return countLCT;
+//     }
+// }
