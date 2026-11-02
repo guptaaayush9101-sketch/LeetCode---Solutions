@@ -1,0 +1,26 @@
+class Solution {
+    public long countStableSubarrays(int[] capacity) {
+        int n = capacity.length;
+        int count = 0;
+        if(n < 3){
+            return 0;
+        }
+        int p[] = new int[n+1];
+        p[0] = 0;
+        for(int i=1;i<n;i++){
+            p[i] = p[i-1] + capacity[i];
+        }
+        for(int l=0;l<p.length;l++){
+            for(int r=l;r<p.length-1;r++){
+                int len = r-l+1;
+                if(len >= 3){
+                    int val = p[r-1] - p[l];
+                    if(val == capacity[l] && val == capacity[r]){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+}
