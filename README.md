@@ -9,6 +9,7 @@ My LeetCode practice solutions
 | [0001-two-sum](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0001-two-sum) |
 | [0128-longest-consecutive-sequence](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0128-longest-consecutive-sequence) |
 | [0153-find-minimum-in-rotated-sorted-array](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0153-find-minimum-in-rotated-sorted-array) |
+| [1002-find-common-characters](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/1002-find-common-characters) |
 | [2006-count-number-of-pairs-with-absolute-difference-k](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/2006-count-number-of-pairs-with-absolute-difference-k) |
 | [2131-longest-palindrome-by-concatenating-two-letter-words](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/2131-longest-palindrome-by-concatenating-two-letter-words) |
 ## Binary Search
@@ -22,6 +23,7 @@ My LeetCode practice solutions
 | [0128-longest-consecutive-sequence](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0128-longest-consecutive-sequence) |
 | [0242-valid-anagram](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0242-valid-anagram) |
 | [0387-first-unique-character-in-a-string](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0387-first-unique-character-in-a-string) |
+| [1002-find-common-characters](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/1002-find-common-characters) |
 | [2006-count-number-of-pairs-with-absolute-difference-k](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/2006-count-number-of-pairs-with-absolute-difference-k) |
 | [2131-longest-palindrome-by-concatenating-two-letter-words](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/2131-longest-palindrome-by-concatenating-two-letter-words) |
 ## String
@@ -29,6 +31,7 @@ My LeetCode practice solutions
 | ------- |
 | [0242-valid-anagram](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0242-valid-anagram) |
 | [0387-first-unique-character-in-a-string](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/0387-first-unique-character-in-a-string) |
+| [1002-find-common-characters](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/1002-find-common-characters) |
 | [2131-longest-palindrome-by-concatenating-two-letter-words](https://github.com/guptaaayush9101-sketch/LeetCode---Solutions/tree/master/2131-longest-palindrome-by-concatenating-two-letter-words) |
 ## Sorting
 |  |
